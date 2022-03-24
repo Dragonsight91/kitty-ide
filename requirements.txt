@@ -1,0 +1,5 @@
+kakoune
+lf
+kitty
+w3m
+pandoc
