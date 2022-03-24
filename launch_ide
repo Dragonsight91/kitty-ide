@@ -1,0 +1,4 @@
+#!/bin/bash
+
+kitty ~/ide/launch-ide.sh &> /dev/null &
+disown

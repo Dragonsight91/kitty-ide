@@ -1,0 +1,20 @@
+# custom commands
+cmd open ${{
+	kak -c $SES -e 'lsp-auto-hover-enable hover_buf' $f
+}}
+cmd md_render ${{
+	pandoc $f | w3m -T text/html
+}}
+cmd on-cd &{{
+    kitty @ send-text --match title:terminal-$SES "\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b"
+    kitty @ send-text --match title:terminal-$SES "(test \"$(git rev-parse --git-dir 2> /dev/null | wc -c)\" -le 5) && cd $PWD\n"
+    kitty @ send-text --match title:terminal-$SES "clear\n" 
+}}
+cmd q :quit
+map <enter> md_render
+
+set nopreview
+
+${{
+    kitty @ send-text --match title:terminal-$SES "cd $PWD\nclear\n"
+}}
