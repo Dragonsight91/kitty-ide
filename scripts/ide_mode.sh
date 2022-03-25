@@ -1,6 +1,7 @@
 #!/bin/bash
+
 export SES=$$
-export REAL_DIR="$(dirrname "$(readlink -f "$0")")"
+export REAL_DIR="$(dirname "$(readlink -f "$0")")"
 conf_path="$DIR"/../config/lf-conf
 
 # launch kakoune session
