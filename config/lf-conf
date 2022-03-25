@@ -5,7 +5,7 @@ cmd open ${{
 }}
 
 # create a read command, so we can render markdown and stuff
-cmd read ${{
+cmd render ${{
 	pandoc $f | w3m -T text/html
 }}
 
@@ -16,14 +16,44 @@ cmd on-cd &{{
     kitty @ send-text --match title:terminal-$SES "clear\n" 
 }}
 
+cmd rg &{{ 
+    kitty @ send-text --match title:terminal-$SES "\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b"
+    kitty @ send-text --match title:terminal-$SES "rg $@ \"$PWD\"\n" 
+}}
+
+cmd fd &{{
+    kitty @ send-text --match title:terminal-$SES "\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b"
+    kitty @ send-text --match title:terminal-$SES "fd $@\n" 
+}}
+
+# commit all and edit 
+cmd gcea &{{
+    kitty @ send-text --match title:terminal-$SES "\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b"
+    kitty @ send-text --match title:terminal-$SES "git commit --all --edit \n"
+    kitty @ focus-window --match title:terminal-$SES
+}}
+
+# push
+cmd gp &{{
+    kitty @ send-text --match title:terminal-$SES "\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b"
+    kitty @ send-text  --match title:terminal-$SES "git push\n" 
+}}
+
+# push force
+cmd  gp! &{{
+    kitty @ send-text --match title:terminal-$SES "\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b"
+    kitty @ send-text --match title:terminal-$SES "git push -f $@\n" 
+}}
+
 # convenience commands
 cmd new-file $touch $PWD/new-file
 cmd new-dir $mkdir $PWD/new-dir
 cmd q :quit
 
+map <c-d> delete
 map <c-n> new-file
 map N new-dir
-map <enter> read
+map <enter> render
 
 set nopreview
 

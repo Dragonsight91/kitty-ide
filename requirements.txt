@@ -3,3 +3,5 @@ lf
 kitty
 w3m
 pandoc
+ripgrep
+fg
