@@ -1,4 +1,4 @@
 #!/bin/bash
-
-kitty --config ~/ide/config/kitty.conf ~/ide/scripts/launch-ide.sh &> /dev/null &
-disown
+DIR="$(dirname "$(readlink -f "$0")")"
+echo $DIR
+kitty --config "$DIR"/config/kitty.conf "$DIR"/scripts/launch-ide.sh &> /dev/null &

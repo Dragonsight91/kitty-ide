@@ -1,20 +1,33 @@
-# custom commands
+# comamnds that define behavior
+# overwrite the open command so we can do custom stuff
 cmd open ${{
 	kak -c $SES -e 'lsp-auto-hover-enable hover_buf' $f
 }}
-cmd md_render ${{
+
+# create a read command, so we can render markdown and stuff
+cmd read ${{
 	pandoc $f | w3m -T text/html
 }}
+
+# hook into cd and send commands to ide terminal
 cmd on-cd &{{
     kitty @ send-text --match title:terminal-$SES "\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b"
     kitty @ send-text --match title:terminal-$SES "(test \"$(git rev-parse --git-dir 2> /dev/null | wc -c)\" -le 5) && cd $PWD\n"
     kitty @ send-text --match title:terminal-$SES "clear\n" 
 }}
+
+# convenience commands
+cmd new-file $touch $PWD/new-file
+cmd new-dir $mkdir $PWD/new-dir
 cmd q :quit
-map <enter> md_render
+
+map <c-n> new-file
+map N new-dir
+map <enter> read
 
 set nopreview
 
 ${{
     kitty @ send-text --match title:terminal-$SES "cd $PWD\nclear\n"
 }}
+

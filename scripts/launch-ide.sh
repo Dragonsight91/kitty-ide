@@ -1,4 +1,4 @@
 #!/bin/bash
-
-source ~/ide/scripts/ide_mode.sh
+DIR="$(dirname "$(readlink -f "$0")")"
+source "$DIR"/ide_mode.sh
 
